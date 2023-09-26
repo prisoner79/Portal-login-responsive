@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Login</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 600;
+        }
+
+        h1 {
+            display: none;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-image: linear-gradient(to right, #dbb4e2, #b58fbb, #8f6b96, #6c4a72bb, #4a2a50d2);
+        }
+
+        .main {
+            /* border: 5px solid rgba(255, 0, 0, 0.39); */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border-radius: 2rem;
+            background: #ffff;
+            height: 70vh;
+            width: 55vw;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #pass1,
+        #pass2,
+        #user {
+            border-radius: 8px;
+            padding: 5px;
+        }
+
+        #Login {
+            border-radius: 8px;
+            padding: 0.3rem 4.4rem;
+        }
+
+        #Login:hover {
+            background-color: #dbb4e2;
+            transition: 0.3s;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #message {
+            font-weight: 800;
+            font-size: 20px;
+            color: #9553a0;
+        }
+
+        .mess {
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            font-size: 20px;
+            transform: translateY(-20px);
+        }
+
+        .note {
+            height: 5rem;
+            width: 50vw;
+            color: #9553a0;
+            font-weight: bolder;
+            display: block;
+            transform: translateY(-100px);
+            margin: 15px 0 0 30px;
+        }
+
+        span {
+            color: red;
+        }
+
+        h2 {
+            transform: translate(100px, -180px);
+            border: 2px solid #bf71cc;
+            background-color: #bf71cc;
+            color: white;
+            border-radius: 20px;
+            font-size: 30px;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+
+
+
+        /* media quarry  */
+        @media (max-width: 765px) {
+            .main {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            h1 {
+                display: block;
+                transform: translateY(-70px);
+            }
+
+            .img {
+                display: none;
+            }
+
+            form {
+                transform: translateY(-40px);
+            }
+
+            .note {
+                transform: translateY(-130px);
+            }
+
+            h2 {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .img {
+                display: none;
+            }
+
+            h1 {
+                display: block;
+                transform: translateY(-60px);
+            }
+
+            .form {
+                font-size: 15px;
+                transform: translateY(-50px);
+            }
+
+            .message {
+                font-size: 30px;
+            }
+
+            .note {
+                height: 10rem;
+                width: 50vw;
+                margin: 0px 0 0 30px;
+                transform: translateY(-150px);
+            }
+
+            .mess {
+                height: 15px;
+            }
+
+            h2 {
+                display: none;
+            }
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Portal Login :</h2>
+        <div class="cont-1">
+            <div class="main">
+                <h1>Portal Login</h1>
+                <div class="img">
+                    <img src="./Mobile login-rafiki.png" height="400" width="300" alt="">
+                </div>
+                <form onsubmit="return valid()" class="form">
+                    <label for="user">User ID :</label> <br>
+                    <input type="text" name="" required placeholder="Enter User ID" id="user"> <br> <br>
+                    <label for="pass1">Enter Password :</label> <br>
+                    <input type="password" id="pass1" required placeholder="Enter Password" />
+                    <br> <br>
+                    <label for="pass2">Confirm Password :</label> <br>
+                    <input type="password" id="pass2" required placeholder="Confirm Password" /> <br> <br>
+                    <div class="btn">
+                        <button id="Login" type="submit">Login</button>
+                    </div> <br>
+                    <div class="mess">
+                        <p id="message"></p>
+                    </div>
+
+            </div>
+            <div class="note">
+                <p><span class="sp">NOTE:</span> &#8594;Password must include <span class="case">lowerCase</span>, <span
+                        class="case">UpperCase</span>, <span class="case">Numeric</span>, <span class="case">Special
+                        character</span>, <span class="case">Minimum 8 Character long</span><br>
+                    &#8594;Password
+                    must be greater than or equal to 8 character long</p>
+            </div>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+
+
+        function valid() {
+            let login = document.querySelector("#Login");
+            let msg = document.querySelector("#message");
+            let pass1 = document.getElementById("pass1").value;
+            let pass2 = document.getElementById("pass2").value;
+
+            const lowerCase = new RegExp('(?=.*[a-z])').test(pass1);
+            const upperCase = new RegExp('(?=.*[A-Z])').test(pass1);
+            const number = new RegExp('(?=.*[0-9])').test(pass1);
+            const specialChar = new RegExp('(?=.*[!@#\$%\^&\*])').test(pass1);
+            const eightChar = new RegExp('(?=.{8,})').test(pass1);
+
+            if (pass1 == "" || pass2 == "") {
+                msg.innerText = "Please enter Password";
+                return false;
+            }
+            else if (pass1 != pass2) {
+                msg.innerText = "Password Not Match";
+                return false;
+            }
+            else {
+                msg.innerText = "Login Successfull";
+                return false;
+            }
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>
